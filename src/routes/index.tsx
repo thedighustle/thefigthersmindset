@@ -191,7 +191,7 @@ function Index() {
           </p>
           <div className="mt-10 flex flex-col items-center gap-4">
             <a href="#enroll" className="btn-fighter text-base sm:text-lg">
-              Step Into The Ring — Enroll Now
+              STEP INTO THE RING
             </a>
             <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
               Instant Access • 12 Video Modules • eBooks, Worksheets & Audio Drills Included
