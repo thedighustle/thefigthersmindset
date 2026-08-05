@@ -1,5 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 import heroGym from "@/assets/hero-gym.jpg";
+import handsWrapped from "@/assets/hands-wrapped.jpg";
+import shadowboxer from "@/assets/shadowboxer.jpg";
+import punchingBag from "@/assets/punching-bag.jpg";
+import ringCorner from "@/assets/ring-corner.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -8,7 +13,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Train your mind like a championship fighter. A 12-round video-guided mental training system engineered to destroy self-sabotage, build ironclad discipline, and forge unbreakable focus.",
+          "Train your mind like a championship fighter. A 12-round, video-guided mental training system engineered to destroy self-sabotage, build ironclad discipline, and forge unbreakable focus.",
       },
       { property: "og:title", content: "The Fighter's Mindset | Mental Conditioning for Champions" },
       {
@@ -98,7 +103,64 @@ const rounds = [
   },
 ];
 
+function useScrollReveal() {
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-visible");
+            observerRef.current?.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+    );
+
+    const elements = document.querySelectorAll(".reveal");
+    elements.forEach((el) => observerRef.current?.observe(el));
+
+    return () => observerRef.current?.disconnect();
+  }, []);
+}
+
+function ImageCard({
+  src,
+  alt,
+  className,
+  aspect = "aspect-[4/3]",
+  priority = false,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  aspect?: string;
+  priority?: boolean;
+}) {
+  return (
+    <div className={`group overflow-hidden rounded-lg border border-border/60 bg-card ${className ?? ""}`}>
+      <div className={`relative ${aspect} overflow-hidden`}>
+        <img
+          src={src}
+          alt={alt}
+          className="img-zoom h-full w-full object-cover group-hover:img-zoom-hover"
+          width={1024}
+          height={768}
+          loading={priority ? "eager" : "lazy"}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-canvas/60 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-30" />
+      </div>
+    </div>
+  );
+}
+
 function Index() {
+  useScrollReveal();
+
   return (
     <main className="relative min-h-screen bg-background text-foreground">
       {/* Hero */}
@@ -145,38 +207,65 @@ function Index() {
       {/* Hard Truth */}
       <section className="relative px-4 py-24 sm:py-32">
         <div className="absolute inset-0 spotlight-gradient opacity-50" />
-        <div className="relative z-10 mx-auto max-w-4xl">
-          <div className="text-center">
-            <p className="section-kicker mb-5">The Hard Truth</p>
-            <h2 className="section-title text-balance">
-              Motivation Is A Lie.
-              <br />
-              <span className="text-primary">Discipline Is A System.</span>
-            </h2>
+        <div className="relative z-10 mx-auto max-w-6xl">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div className="reveal">
+              <ImageCard
+                src={handsWrapped}
+                alt="Close-up of a fighter wrapping their hands with black hand wraps in a dim gym"
+                aspect="aspect-[4/3]"
+              />
+            </div>
+            <div className="reveal">
+              <p className="section-kicker mb-5">The Hard Truth</p>
+              <h2 className="section-title text-balance">
+                Motivation Is A Lie.
+                <br />
+                <span className="text-primary">Discipline Is A System.</span>
+              </h2>
+              <div className="mt-8 border-l-2 border-primary/40 bg-card/40 p-6 backdrop-blur-sm">
+                <div className="quote-mark -mb-4">“</div>
+                <p className="text-xl font-bold leading-snug text-foreground sm:text-2xl">
+                  Champions don't feel like showing up either. They just do it.
+                </p>
+              </div>
+              <div className="mt-8 space-y-4 text-base leading-relaxed text-foreground/80">
+                <p>
+                  You don't have a talent problem. You don't have a time problem. You have a{" "}
+                  <strong className="text-foreground">mental conditioning problem</strong>.
+                </p>
+                <p>
+                  Every day, you step into the ring against invisible opponents: procrastination, self-doubt,
+                  burn-out, and the quiet voice telling you to “start tomorrow.”
+                </p>
+                <p>
+                  <strong className="text-foreground">The Fighter's Mindset</strong> isn't motivational hype. It
+                  is a direct, immersive mental training program designed in the corner of the gym.
+                </p>
+              </div>
+            </div>
           </div>
+        </div>
+      </section>
 
-          <div className="mt-12 border-l-2 border-primary/40 bg-card/40 p-8 backdrop-blur-sm sm:p-12">
-            <div className="quote-mark -mb-4">“</div>
-            <p className="text-2xl font-bold leading-snug text-foreground sm:text-3xl">
-              Champions don't feel like showing up either. They just do it.
-            </p>
-          </div>
-
-          <div className="mt-12 space-y-6 text-lg leading-relaxed text-foreground/80">
-            <p>
-              You don't have a talent problem. You don't have a time problem. You have a{" "}
-              <strong className="text-foreground">mental conditioning problem</strong>.
-            </p>
-            <p>
-              Every day, you step into the ring against invisible opponents: procrastination, self-doubt,
-              burn-out, and the quiet voice telling you to “start tomorrow.”
-            </p>
-            <p>
-              <strong className="text-foreground">The Fighter's Mindset</strong> isn't motivational hype. It
-              isn't inspirational quotes over sunrise photos. It is a direct, immersive mental training program
-              designed in the corner of the gym—built to help you think, operate, and follow through with the
-              relentless clarity of a fighter.
-            </p>
+      {/* Shadowboxer interlude */}
+      <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
+        <img
+          src={shadowboxer}
+          alt="Silhouette of a fighter shadowboxing under a single spotlight in a dark gym"
+          className="h-full w-full object-cover"
+          loading="lazy"
+          width={1024}
+          height={768}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-canvas via-canvas/40 to-canvas" />
+        <div className="absolute inset-0 flex items-center justify-center px-4">
+          <div className="reveal max-w-3xl text-center">
+            <div className="quote-mark text-center">“</div>
+            <blockquote className="text-3xl font-bold leading-tight text-foreground text-glow sm:text-4xl md:text-5xl">
+              The fight is won or lost far away from witnesses — behind the lines, in the gym, and out there on
+              the road, long before I dance under those lights.
+            </blockquote>
           </div>
         </div>
       </section>
@@ -185,7 +274,7 @@ function Index() {
       <section id="program" className="relative px-4 py-24 sm:py-32">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
         <div className="relative z-10 mx-auto max-w-6xl">
-          <div className="text-center">
+          <div className="text-center reveal">
             <p className="section-kicker mb-5">What's Inside The Program</p>
             <h2 className="section-title text-balance">
               The 12-Round
@@ -198,22 +287,37 @@ function Index() {
             </p>
           </div>
 
-          <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+          <div className="reveal mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="group relative overflow-hidden rounded-xl border border-border/60 sm:col-span-2 lg:col-span-2 lg:row-span-2">
+              <img
+                src={punchingBag}
+                alt="Worn leather punching bag hanging in a dark gym with dramatic amber lighting"
+                className="img-zoom h-full w-full object-cover group-hover:img-zoom-hover"
+                loading="lazy"
+                width={1024}
+                height={768}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-canvas via-canvas/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6 sm:p-8">
+                <p className="section-kicker mb-2">Round by Round</p>
+                <p className="text-2xl font-bold text-foreground">12 modules that hit harder than motivation.</p>
+              </div>
+            </div>
             {rounds.map((round) => (
               <div
                 key={round.num}
-                className="group bg-card p-6 transition-colors duration-300 hover:bg-card/80 sm:p-8"
+                className="reveal group bg-card p-5 transition-colors duration-300 hover:bg-card/80"
               >
-                <div className="flex items-start justify-between gap-4">
-                  <span className="text-4xl font-bold leading-none text-primary/60 group-hover:text-primary/80">
+                <div className="flex items-start justify-between gap-3">
+                  <span className="text-3xl font-bold leading-none text-primary/60 group-hover:text-primary/80">
                     {round.num}
                   </span>
                   <span className="rounded-full bg-secondary px-3 py-1 text-xs font-semibold tracking-wider text-secondary-foreground uppercase">
                     {round.resource}
                   </span>
                 </div>
-                <h3 className="mt-6 text-2xl font-bold tracking-tight text-foreground">{round.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{round.focus}</p>
+                <h3 className="mt-5 text-xl font-bold tracking-tight text-foreground">{round.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{round.focus}</p>
               </div>
             ))}
           </div>
@@ -222,8 +326,8 @@ function Index() {
 
       {/* How It Works */}
       <section className="relative px-4 py-24 sm:py-32">
-        <div className="relative z-10 mx-auto max-w-5xl">
-          <div className="text-center">
+        <div className="relative z-10 mx-auto max-w-6xl">
+          <div className="text-center reveal">
             <p className="section-kicker mb-5">How It Works</p>
             <h2 className="section-title text-balance">
               Inside The Corner:
@@ -232,43 +336,48 @@ function Index() {
             </h2>
           </div>
 
-          <div className="mt-16 flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
-            <div className="corner-cut bg-card/60 p-6 text-center backdrop-blur-sm sm:p-8">
-              <h3 className="text-xl font-bold tracking-wide text-primary uppercase">AI-Driven Cinematic Videos</h3>
+          <div className="mt-16 grid gap-8 lg:grid-cols-2">
+            <div className="reveal grid content-center gap-6">
+              <div className="corner-cut border border-primary/30 bg-card/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-primary/60 hover:bg-card/70">
+                <h3 className="text-xl font-bold tracking-wide text-primary uppercase">AI-Driven Cinematic Videos</h3>
+              </div>
+              <div className="corner-cut border border-primary/30 bg-card/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-primary/60 hover:bg-card/70">
+                <h3 className="text-xl font-bold tracking-wide text-primary uppercase">Dedicated eBooks & Guides</h3>
+              </div>
+              <div className="corner-cut border border-primary/30 bg-card/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-primary/60 hover:bg-card/70">
+                <h3 className="text-xl font-bold tracking-wide text-primary uppercase">Audio Drills & Workbook Systems</h3>
+              </div>
             </div>
-            <div className="hidden text-primary/40 sm:block">▼</div>
-            <div className="block text-primary/40 sm:hidden">▼</div>
-            <div className="corner-cut bg-card/60 p-6 text-center backdrop-blur-sm sm:p-8">
-              <h3 className="text-xl font-bold tracking-wide text-primary uppercase">Dedicated eBooks & Guides</h3>
-            </div>
-            <div className="hidden text-primary/40 sm:block">▼</div>
-            <div className="block text-primary/40 sm:hidden">▼</div>
-            <div className="corner-cut bg-card/60 p-6 text-center backdrop-blur-sm sm:p-8">
-              <h3 className="text-xl font-bold tracking-wide text-primary uppercase">Audio Drills & Workbook Systems</h3>
-            </div>
-          </div>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-3">
-            <div className="rounded-xl border border-border/50 bg-card/40 p-6">
-              <h4 className="text-lg font-bold text-foreground">Cinematic AI Video Lessons</h4>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                No fluff. Direct, intense, and atmospheric lessons that feel like a head coach talking you through
-                your biggest personal battles.
-              </p>
-            </div>
-            <div className="rounded-xl border border-border/50 bg-card/40 p-6">
-              <h4 className="text-lg font-bold text-foreground">Comprehensive eBooks</h4>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Deep-dive manuals for every round that explain why fighter psychology works and how to apply it
-                directly to your career, health, and mindset.
-              </p>
-            </div>
-            <div className="rounded-xl border border-border/50 bg-card/40 p-6">
-              <h4 className="text-lg font-bold text-foreground">Practical Systems</h4>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Audio drills, goal scorecards, and reflection templates designed to convert mental concepts into
-                daily physical habits.
-              </p>
+            <div className="reveal">
+              <ImageCard
+                src={ringCorner}
+                alt="Empty boxing ring corner with white ropes, stool, and towel under a single spotlight"
+                aspect="aspect-[4/3]"
+              />
+              <div className="mt-6 grid gap-6 sm:grid-cols-2">
+                <div className="rounded-xl border border-border/50 bg-card/40 p-5 transition-colors hover:bg-card/60">
+                  <h4 className="text-lg font-bold text-foreground">Cinematic AI Video Lessons</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    No fluff. Direct, intense, and atmospheric lessons that feel like a head coach talking you
+                    through your biggest personal battles.
+                  </p>
+                </div>
+                <div className="rounded-xl border border-border/50 bg-card/40 p-5 transition-colors hover:bg-card/60">
+                  <h4 className="text-lg font-bold text-foreground">Comprehensive eBooks</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    Deep-dive manuals for every round that explain why fighter psychology works and how to apply
+                    it directly to your career, health, and mindset.
+                  </p>
+                </div>
+                <div className="rounded-xl border border-border/50 bg-card/40 p-5 transition-colors hover:bg-card/60 sm:col-span-2">
+                  <h4 className="text-lg font-bold text-foreground">Practical Systems</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    Audio drills, goal scorecards, and reflection templates designed to convert mental concepts
+                    into daily physical habits.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -277,19 +386,30 @@ function Index() {
       {/* Social Proof / Mentality */}
       <section className="relative px-4 py-24 sm:py-32">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/5" />
-        <div className="relative z-10 mx-auto max-w-4xl">
-          <div className="corner-cut border border-primary/30 bg-card/50 p-8 backdrop-blur-sm sm:p-12">
-            <p className="section-kicker mb-6 text-center">The Opponent Was Never Out There</p>
-            <div className="quote-mark text-center">“</div>
-            <blockquote className="text-center text-2xl font-bold leading-snug text-foreground sm:text-3xl">
-              The real fight doesn't happen under the bright lights in front of thousands of people. It happens in
-              the quiet, empty gym at 5:00 AM when no one is watching. This program gives you the exact blueprint
-              to win that fight.
-            </blockquote>
-            <div className="mt-8 flex items-center justify-center gap-3">
-              <div className="h-px w-12 bg-primary/40" />
-              <span className="text-sm font-bold tracking-widest text-primary uppercase">The Fighter's Mindset</span>
-              <div className="h-px w-12 bg-primary/40" />
+        <div className="relative z-10 mx-auto max-w-6xl">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div className="reveal order-2 lg:order-1">
+              <div className="corner-cut border border-primary/30 bg-card/50 p-8 backdrop-blur-sm sm:p-12">
+                <p className="section-kicker mb-6 text-center">The Opponent Was Never Out There</p>
+                <div className="quote-mark text-center">“</div>
+                <blockquote className="text-center text-xl font-bold leading-snug text-foreground sm:text-2xl">
+                  The real fight doesn't happen under the bright lights in front of thousands of people. It happens
+                  in the quiet, empty gym at 5:00 AM when no one is watching. This program gives you the exact
+                  blueprint to win that fight.
+                </blockquote>
+                <div className="mt-8 flex items-center justify-center gap-3">
+                  <div className="h-px w-12 bg-primary/40" />
+                  <span className="text-sm font-bold tracking-widest text-primary uppercase">The Fighter's Mindset</span>
+                  <div className="h-px w-12 bg-primary/40" />
+                </div>
+              </div>
+            </div>
+            <div className="reveal order-1 lg:order-2">
+              <ImageCard
+                src={shadowboxer}
+                alt="Silhouette of a fighter training alone under a spotlight in a dark gym"
+                aspect="aspect-[4/3]"
+              />
             </div>
           </div>
         </div>
