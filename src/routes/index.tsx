@@ -441,7 +441,12 @@ function Index() {
             refuses to break.
           </p>
           <div className="mt-10 flex flex-col items-center gap-4">
-            <a href="#" className="btn-fighter text-base sm:text-lg">
+            <a
+              href="https://whop.com/the-fighter-s-mindset/12-round-fighter-mindset-91/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-fighter text-base sm:text-lg"
+            >
               Claim Your Corner — Start Round 1 Now
             </a>
             <p className="max-w-md text-xs leading-relaxed text-muted-foreground">
