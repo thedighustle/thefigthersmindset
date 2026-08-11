@@ -6,7 +6,7 @@
 
 /*
  * Design system: The Fighter's Mindset
- * Dark, cinematic, gritty boxing-gym aesthetic.
+ * Fight-poster aesthetic — bone paper, oxblood red, championship gold.
  * All colors use oklch format.
  */
 
@@ -55,52 +55,54 @@
   --color-ring-offset: var(--background);
   /* Fighter tokens */
   --color-blood: var(--blood);
-  --color-amber-glow: var(--amber-glow);
+  --color-gold: var(--gold);
   --color-canvas: var(--canvas);
+  --color-bone: var(--bone);
   --color-fog: var(--fog);
 }
 
 :root {
-  --radius: 0.5rem;
-  /* Dark gym floor — near black with warm undertones */
-  --background: oklch(0.07 0.02 60);
-  --foreground: oklch(0.94 0.01 80);
-  --card: oklch(0.11 0.02 60);
-  --card-foreground: oklch(0.94 0.01 80);
-  --popover: oklch(0.11 0.02 60);
-  --popover-foreground: oklch(0.94 0.01 80);
-  /* Spotlight amber / gold */
-  --primary: oklch(0.72 0.15 75);
-  --primary-foreground: oklch(0.08 0.02 60);
-  --secondary: oklch(0.16 0.02 60);
-  --secondary-foreground: oklch(0.94 0.01 80);
-  --muted: oklch(0.16 0.02 60);
-  --muted-foreground: oklch(0.65 0.03 80);
-  --accent: oklch(0.22 0.04 30);
-  --accent-foreground: oklch(0.94 0.01 80);
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.98 0.01 80);
-  --border: oklch(0.2 0.02 60 / 0.6);
-  --input: oklch(0.16 0.02 60 / 0.8);
-  --ring: oklch(0.72 0.15 75);
-  --chart-1: oklch(0.72 0.15 75);
-  --chart-2: oklch(0.55 0.22 25);
-  --chart-3: oklch(0.65 0.03 80);
-  --chart-4: oklch(0.94 0.01 80);
-  --chart-5: oklch(0.11 0.02 60);
-  --sidebar: oklch(0.08 0.02 60);
-  --sidebar-foreground: oklch(0.94 0.01 80);
-  --sidebar-primary: oklch(0.72 0.15 75);
-  --sidebar-primary-foreground: oklch(0.08 0.02 60);
-  --sidebar-accent: oklch(0.16 0.02 60);
-  --sidebar-accent-foreground: oklch(0.94 0.01 80);
-  --sidebar-border: oklch(0.2 0.02 60 / 0.6);
-  --sidebar-ring: oklch(0.72 0.15 75);
+  --radius: 0.125rem;
+  /* Ring-side black with a cold cast */
+  --background: oklch(0.09 0.008 30);
+  --foreground: oklch(0.95 0.012 85);
+  --card: oklch(0.13 0.01 30);
+  --card-foreground: oklch(0.95 0.012 85);
+  --popover: oklch(0.13 0.01 30);
+  --popover-foreground: oklch(0.95 0.012 85);
+  /* Oxblood red — the primary strike color */
+  --primary: oklch(0.5 0.19 27);
+  --primary-foreground: oklch(0.97 0.012 85);
+  --secondary: oklch(0.18 0.012 30);
+  --secondary-foreground: oklch(0.95 0.012 85);
+  --muted: oklch(0.18 0.012 30);
+  --muted-foreground: oklch(0.68 0.015 70);
+  --accent: oklch(0.78 0.13 82);
+  --accent-foreground: oklch(0.12 0.01 30);
+  --destructive: oklch(0.5 0.19 27);
+  --destructive-foreground: oklch(0.98 0.01 85);
+  --border: oklch(0.28 0.015 40 / 0.55);
+  --input: oklch(0.18 0.012 30 / 0.8);
+  --ring: oklch(0.5 0.19 27);
+  --chart-1: oklch(0.5 0.19 27);
+  --chart-2: oklch(0.78 0.13 82);
+  --chart-3: oklch(0.68 0.015 70);
+  --chart-4: oklch(0.95 0.012 85);
+  --chart-5: oklch(0.13 0.01 30);
+  --sidebar: oklch(0.11 0.01 30);
+  --sidebar-foreground: oklch(0.95 0.012 85);
+  --sidebar-primary: oklch(0.5 0.19 27);
+  --sidebar-primary-foreground: oklch(0.97 0.012 85);
+  --sidebar-accent: oklch(0.18 0.012 30);
+  --sidebar-accent-foreground: oklch(0.95 0.012 85);
+  --sidebar-border: oklch(0.28 0.015 40 / 0.55);
+  --sidebar-ring: oklch(0.5 0.19 27);
   /* Fighter-specific semantic tokens */
-  --blood: oklch(0.55 0.22 25);
-  --amber-glow: oklch(0.72 0.15 75);
-  --canvas: oklch(0.07 0.02 60);
-  --fog: oklch(0.16 0.02 60);
+  --blood: oklch(0.5 0.19 27);
+  --gold: oklch(0.78 0.13 82);
+  --canvas: oklch(0.09 0.008 30);
+  --bone: oklch(0.95 0.012 85);
+  --fog: oklch(0.18 0.012 30);
 }
 
 @layer base {
@@ -111,32 +113,33 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: "Barlow", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: "Bebas Neue", "Oswald", ui-sans-serif, system-ui, sans-serif;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
+    font-weight: 400;
   }
 }
 
 @utility text-glow {
-  text-shadow: 0 0 40px oklch(0.72 0.15 75 / 0.35);
+  text-shadow: 0 0 40px oklch(0.5 0.19 27 / 0.45);
 }
 
 @utility spotlight-gradient {
   background: radial-gradient(
     ellipse at 50% 0%,
-    oklch(0.72 0.15 75 / 0.18) 0%,
-    oklch(0.72 0.15 75 / 0.05) 35%,
-    transparent 70%
+    oklch(0.5 0.19 27 / 0.22) 0%,
+    oklch(0.5 0.19 27 / 0.06) 38%,
+    transparent 72%
   );
 }
 
 @utility vignette {
-  background: radial-gradient(ellipse at center, transparent 0%, oklch(0.05 0.02 60 / 0.85) 100%);
+  background: radial-gradient(ellipse at center, transparent 0%, oklch(0.05 0.008 30 / 0.9) 100%);
 }
 
 @utility corner-cut {
@@ -154,17 +157,29 @@
   text-wrap: balance;
 }
 
-@utility film-grain {
-  position: relative;
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px oklch(0.95 0.012 85 / 0.4);
 }
 
-@utility film-grain-after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.06;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+@utility text-outline-primary {
+  color: transparent;
+  -webkit-text-stroke: 1.5px oklch(0.5 0.19 27);
+}
+
+@utility rope-divider {
+  background-image: repeating-linear-gradient(
+    90deg,
+    oklch(0.5 0.19 27) 0px,
+    oklch(0.5 0.19 27) 22px,
+    transparent 22px,
+    transparent 34px
+  );
+}
+
+@utility poster-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.07;
 }
 
 @utility reveal {
@@ -183,19 +198,28 @@
 }
 
 @utility img-zoom-hover {
-  transform: scale(1.08);
+  transform: scale(1.06);
 }
 
 @utility border-glow {
-  box-shadow: 0 0 0 1px oklch(0.72 0.15 75 / 0.3), 0 0 40px oklch(0.72 0.15 75 / 0.15);
+  box-shadow: 0 0 0 1px oklch(0.5 0.19 27 / 0.35), 0 0 48px oklch(0.5 0.19 27 / 0.18);
+}
+
+@utility marquee-track {
+  animation: fm-marquee 34s linear infinite;
+}
+
+@keyframes fm-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 @layer components {
   .btn-fighter {
     @apply inline-flex items-center justify-center gap-2;
-    @apply bg-primary px-8 py-4 text-sm font-bold tracking-widest text-primary-foreground uppercase;
+    @apply bg-primary px-8 py-4 text-sm font-bold tracking-[0.18em] text-primary-foreground uppercase;
     @apply transition-all duration-200 ease-out;
-    @apply hover:brightness-110 hover:shadow-[0_0_40px_oklch(0.72_0.15_75_/_0.35)];
+    @apply hover:brightness-115 hover:shadow-[0_0_44px_oklch(0.5_0.19_27_/_0.45)];
     @apply active:scale-[0.98];
     clip-path: polygon(
       0 0,
@@ -209,9 +233,9 @@
 
   .btn-fighter-outline {
     @apply inline-flex items-center justify-center gap-2;
-    @apply border border-primary/60 bg-transparent px-8 py-4 text-sm font-bold tracking-widest text-primary uppercase;
+    @apply border border-foreground/30 bg-transparent px-8 py-4 text-sm font-bold tracking-[0.18em] text-foreground uppercase;
     @apply transition-all duration-200 ease-out;
-    @apply hover:bg-primary/10 hover:border-primary;
+    @apply hover:border-primary hover:text-primary;
     @apply active:scale-[0.98];
     clip-path: polygon(
       0 0,
@@ -224,14 +248,23 @@
   }
 
   .section-kicker {
-    @apply text-xs font-bold tracking-[0.2em] text-primary uppercase;
+    @apply text-[0.7rem] font-bold tracking-[0.32em] text-primary uppercase;
   }
 
   .section-title {
-    @apply text-4xl font-bold leading-none tracking-tight text-foreground sm:text-5xl md:text-6xl;
+    @apply text-5xl leading-[0.92] tracking-tight text-foreground uppercase sm:text-6xl md:text-7xl;
+  }
+
+  .display-title {
+    @apply text-6xl leading-[0.86] tracking-tight text-foreground uppercase sm:text-7xl md:text-8xl lg:text-9xl;
   }
 
   .quote-mark {
-    @apply text-6xl leading-none text-primary/30 font-serif select-none;
+    @apply text-6xl leading-none text-primary/40 font-serif select-none;
+  }
+
+  .stat-num {
+    @apply text-5xl leading-none text-accent sm:text-6xl;
+    font-family: "Bebas Neue", sans-serif;
   }
 }
