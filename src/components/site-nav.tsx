@@ -21,7 +21,7 @@ export function SiteNav() {
           <img
             src={logoAsset.url}
             alt="The Fighter's Mindset logo"
-            className="h-7 w-auto sm:h-8"
+            className="h-7 w-auto"
           />
           <span className="sr-only">The Fighter&apos;s Mindset</span>
         </Link>
