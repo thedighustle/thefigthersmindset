@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import logoAsset from "@/assets/tfm-logo.png.asset.json";
 
 export function SiteFooter() {
   return (
@@ -6,9 +7,12 @@ export function SiteFooter() {
       <div className="h-1 w-full rope-divider opacity-70" aria-hidden="true" />
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
         <div>
-          <h2 className="text-2xl tracking-wide text-foreground uppercase">
-            The Fighter&apos;s Mindset
-          </h2>
+          <h2 className="sr-only">The Fighter&apos;s Mindset</h2>
+          <img
+            src={logoAsset.url}
+            alt="The Fighter's Mindset logo"
+            className="h-10 w-auto"
+          />
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
             Mental conditioning for the fight that matters most — the one nobody watches.
           </p>

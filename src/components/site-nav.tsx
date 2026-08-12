@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import logoAsset from "@/assets/tfm-logo.png.asset.json";
 
 const links = [
   { to: "/", label: "Home" },
@@ -16,10 +17,13 @@ export function SiteNav() {
     <header className="sticky top-0 z-50 border-b border-border/60 bg-canvas/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <span className="h-6 w-1.5 bg-primary" aria-hidden="true" />
-          <span className="text-xl leading-none tracking-wide text-foreground uppercase">
-            The Fighter&apos;s Mindset
-          </span>
+          <span className="h-7 w-1.5 bg-primary" aria-hidden="true" />
+          <img
+            src={logoAsset.url}
+            alt="The Fighter's Mindset logo"
+            className="h-7 w-auto sm:h-8"
+          />
+          <span className="sr-only">The Fighter&apos;s Mindset</span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
