@@ -19,7 +19,7 @@ export function SiteNav() {
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <span className="h-7 w-1.5 bg-primary" aria-hidden="true" />
           <img
-            src={logoAsset.url}
+            src="/tfm-logo.png"
             alt="The Fighter's Mindset logo"
             className="h-7 w-auto"
           />
