@@ -21,7 +21,7 @@ export function SiteNav() {
           <img
             src="/tfm-logo.png"
             alt="The Fighter's Mindset logo"
-            className="h-17 w-auto"
+            className="h-20 w-auto"
           />
           <span className="sr-only">The Fighter&apos;s Mindset</span>
         </Link>
