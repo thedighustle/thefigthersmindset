@@ -9,7 +9,7 @@ export function SiteFooter() {
         <div>
           <h2 className="sr-only">The Fighter&apos;s Mindset</h2>
           <img
-            src="/tfm-logo.png"
+            src="/tfm-logo.png" 
             alt="The Fighter's Mindset logo"
             className="h-10 w-auto"
           />
