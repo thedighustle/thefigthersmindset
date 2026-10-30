@@ -34,7 +34,7 @@ const stats = [
   { value: "12", label: "Video Rounds" },
   { value: "12", label: "eBooks & Guides" },
   { value: "05", label: "Audio Drills" },
-  { value: "\u221E", label: "Lifetime Access" },
+  { value: "∞", label: "Lifetime Access" },
 ];
 
 function Index() {
