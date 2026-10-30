@@ -34,7 +34,7 @@ const stats = [
   { value: "12", label: "Video Rounds" },
   { value: "12", label: "eBooks & Guides" },
   { value: "05", label: "Audio Drills" },
-  { value: "/infinity.png", label: "Lifetime Access" },
+  { value: "∞", label: "Lifetime Access" },
 ];
 
 function Index() {
@@ -88,7 +88,7 @@ function Index() {
           <div className="grid grid-cols-2 gap-px border border-border/60 bg-border/40 lg:col-span-4">
             {stats.map((s) => (
               <div key={s.label} className="bg-canvas/80 p-5 backdrop-blur-sm">
-                <p className="stat-num">{s.value}</p>
+                <p className={`stat-num ${s.value === "∞" ? "font-sans" : ""}`}>{s.value}</p> 
                 <p className="mt-2 text-[0.65rem] font-bold tracking-[0.22em] text-muted-foreground uppercase">
                   {s.label}
                 </p>
